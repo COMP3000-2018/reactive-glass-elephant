@@ -35,23 +35,29 @@ You need to install
     ```bash
     host$ git submodule init
     host$ git submodule update
+    host$ git submodule update --recursive --remote
     ```
 4. Install node modules from *host*.
 
     There are problems installing node modules from the guest.
     ```bash
-    host$ cd /vagrant/cstr-client
+    host$ cd cstr-client
     host$ npm install
     ```
-5. Manually start the front-end development server
+5. Start the virtual machine
 
-    A `.env` file has been added to the root of the project. This makes create-react-app poll for changes and recompile when finished.
+   ```bash
+   host$ vagrant up
+   ```
+6. Manually start the front-end development server
+
+    A `.env` file has been added to the root of the project. This makes create-react-app poll for changes and recompile when detected.
     ```bash
     host$ vagrant ssh
     guest$ cd /vagrant/cstr-client
     guest$ npm start
     ```
-6. Manually start the back-end development server
+7. Manually start the back-end development server
     
     Open a separate terminal window from the host and start the backend server
     ```bash
@@ -61,6 +67,6 @@ You need to install
     guest$ flask run
     ```
 
-7. Done!
+8. Profit!
 
-    From your host, you can access the webserver at `localhost:2787`
+    You can access the webserver from your host machine at `localhost:2787`
