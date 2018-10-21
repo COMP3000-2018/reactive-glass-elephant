@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
 
-  config.vm.provision :shell, path: "provision.sh", env: {"FLASK_APP" => "cstr:create_app()", "FLASK_SECRET" => "secret"}
+  config.vm.provision :shell, path: "provision.sh", env: {"FLASK_APP" => "cstr:create_app()", "FLASK_SECRET" => "secret", "FLASK_ENV" => "development"}
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is

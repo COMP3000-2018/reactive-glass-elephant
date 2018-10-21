@@ -29,7 +29,7 @@ make
 make altinstall
 
 # CSTR-Server
-python3.7 -m venv --always-copy /vagrant/cstr-server/venv
+python3.7 -m venv --copies /vagrant/cstr-server/venv
 . /vagrant/cstr-server/venv/bin/activate
 cd /vagrant/cstr-server
 python setup.py install
