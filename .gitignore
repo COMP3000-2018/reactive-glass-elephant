@@ -1,2 +1,4 @@
 .vagrant
 *.log
+cstr-client/
+cstr-server/
