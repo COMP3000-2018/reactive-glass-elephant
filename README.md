@@ -27,46 +27,69 @@ You need to install
 2. Change the working directory to the root of this project folder
 
     ```bash
-    host$ cd reactive-glass-elepahnt
+    host:/$ cd reactive-glass-elephant
     ```
 
-3. Download sub-projects using `git submodule`:
+3. Clone projects into the vagrant folder.:
 
     ```bash
-    host$ git submodule init
-    host$ git submodule update
-    host$ git submodule update --recursive --remote
+    host:/reactive-glass-elephant$ git clone ... # cstr-client
+    host:/reactive-glass-elephant$ git clone ... # cstr-server
     ```
 4. Install node modules from *host*.
 
     There are problems installing node modules from the guest.
     ```bash
-    host$ cd cstr-client
-    host$ npm install
+    host:/reactive-glass-elephant$ cd cstr-client
+    host:/reactive-glass-elephant/cstr-client$ npm install
     ```
 5. Start the virtual machine
 
+   Change to the root of the project and type: `vagrant up`
    ```bash
-   host$ vagrant up
+   host:/reactive-glass-elephant$ vagrant up
    ```
-6. Manually start the front-end development server
+
+6. Install pip packages manually.
+
+   ```bash
+   guest:/vagrant/ cd cstr-server
+   guest:/vagrant/cstr-server$ . venv/bin/activate
+   (venv) guest:/vagrant/cstr-server$ python setup.py install
+   (venv) guest:/vagrant/cstr-server$ deactivate
+   ```
+7. Profit!
+
+    You can access the webserver from your host machine at `localhost:2787`
+
+## Shutting down machine
+
+Open a terminal in host. Change directory into `reactive-glass-elephant`. Type `vagrant halt`
+
+```bash    
+host:/reactive-glass-elephant$ vagrant halt
+``` 
+
+## Resuming work
+When you want to resume work. Change directory into `reactive-glass-elephant`. Type `vagrant up`
+
+1. Open a terminal in host and type `vagrant up`
+    ```bash    
+    host:/reactive-glass-elephant$ vagrant up
+    ```
+2. Manually start the front-end development server
 
     A `.env` file has been added to the root of the project. This makes create-react-app poll for changes and recompile when detected.
     ```bash
-    host$ vagrant ssh
-    guest$ cd /vagrant/cstr-client
-    guest$ npm start
+    host:/reactive-glass-elephant$ vagrant$ vagrant ssh
+    guest:/vagrant/$ cd /vagrant/cstr-client
+    guest:/vagrant/$ npm start
     ```
-7. Manually start the back-end development server
+3. Manually start the back-end development server
     
     Open a separate terminal window from the host and start the backend server
     ```bash
-    host$ vagrant ssh
-    guest$ . /vagrant/cstr-server/venv/bin/activate
+    host:/reactive-glass-elephant$ vagrant ssh
+    guest:/vagrant/reactive-glass-elephant$ . /vagrant/cstr-server/venv/bin/activate
     guest$ cd /vagrant/cstr-server
-    guest$ flask run
-    ```
-
-8. Profit!
-
-    You can access the webserver from your host machine at `localhost:2787`
+    guest:/vagrant/cstr-server$ flask run

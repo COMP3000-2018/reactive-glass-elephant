@@ -4,7 +4,7 @@ apt upgrade -y
 
 # Nginx
 apt install -y nginx
-mv /vagrant/nginx_default /etc/nginx/sites-enabled/default
+cp /vagrant/nginx_default /etc/nginx/sites-enabled/default
 service nginx restart
 
 # React (node, npm)
@@ -20,7 +20,7 @@ apt install -y gcc make libreadline-gplv2-dev libncursesw5-dev libssl-dev libsql
 
 mkdir /tmp/Python37
 cd /tmp/Python37
-wget https://www.python.org/ftp/python/3.7.1/Python-3.7.1rc1.tar.xz
+wget -q --show-progress https://www.python.org/ftp/python/3.7.1/Python-3.7.1rc1.tar.xz
 tar xvf Python-3.7.1rc1.tar.xz
 cd /tmp/Python37/Python-3.7.1rc1
 ./configure
@@ -30,9 +30,9 @@ make altinstall
 
 # CSTR-Server
 python3.7 -m venv --copies /vagrant/cstr-server/venv
-. /vagrant/cstr-server/venv/bin/activate
-cd /vagrant/cstr-server
-python setup.py install
-cd /
-deactivate
 chown -R vagrant:vagrant /vagrant/cstr-server/venv
+
+# Environment Vars
+cd /vagrant/
+cat environment_varibles >> /home/vagrant/.bashrc
+chown -R vagrant:vagrant /home/vagrant/.bashrc
