@@ -1,6 +1,0 @@
-[submodule "cstr-client"]
-	path = cstr-client
-	url = https://github.com/COMP3000-2018/cstr-client
-[submodule "cstr-server"]
-	path = cstr-server
-	url = https://github.com/COMP3000-2018/cstr-server
